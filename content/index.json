@@ -1,10 +1,10 @@
 {
-  "id": "http://edsilv.github.io/uv-ap-starter/content/index.json",
+  "id": "http://edsilv.github.io/uv-app-starter/content/index.json",
   "type": "Collection",
   "label": "Bones",
   "members": [
     {
-      "id": "http://edsilv.github.io/uv-ap-starter/content/animal_skull/index.json",
+      "id": "http://edsilv.github.io/uv-app-starter/content/animal_skull/index.json",
       "type": "Manifest",
       "label": "Animal Skull",
       "thumbnail": [
@@ -15,7 +15,7 @@
       ]
     },
     {
-      "id": "http://edsilv.github.io/uv-ap-starter/content/human_skull/index.json",
+      "id": "http://edsilv.github.io/uv-app-starter/content/human_skull/index.json",
       "type": "Manifest",
       "label": "Human Skull",
       "thumbnail": [
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "id": "http://edsilv.github.io/uv-ap-starter/content/vertebra/index.json",
+      "id": "http://edsilv.github.io/uv-app-starter/content/vertebra/index.json",
       "type": "Manifest",
       "label": "Vertebra",
       "thumbnail": [
