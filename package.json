@@ -6,11 +6,7 @@
   "scripts": {
     "postinstall": "rm -rf uv && cp -R node_modules/universalviewer/uv uv",
     "build": "biiif content -u http://localhost:8888/content",
-<<<<<<< HEAD
     "dist": "biiif content -u https://edsilv.github.io/uv-app-starter/content",
-=======
-    "dist": "biiif content -u https://edsilv.github.io/uv-ap-starter/content",
->>>>>>> master
     "start": "npm run build && http-server -c-1 -p 8888"
   },
   "repository": {
