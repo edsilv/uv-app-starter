@@ -4,16 +4,10 @@
   "description": "Universal Viewer App Starter",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
-    "postinstall": "rm -rf uv && cp -R node_modules/universalviewer/uv uv",
-    "build": "biiif content -u http://localhost:8888/content",
-    "dist": "biiif content -u https://edsilv.github.io/uv-app-starter/content",
-=======
     "postinstall": "npm run sync",
     "sync": "rm -rf uv && cp -R node_modules/universalviewer/uv uv",
     "build": "biiif collection -u http://localhost:8888/collection",
-    "dist": "biiif collection -u https://username.github.io/uv-app-starter-fork/collection",
->>>>>>> upstream/gh-pages
+    "dist": "biiif collection -u https://edsilv.github.io/uv-app-starter/collection",
     "start": "npm run build && http-server -c-1 -p 8888"
   },
   "repository": {
