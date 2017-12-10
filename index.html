@@ -1,31 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>UV App Starter</title>
+    <title>My Collection</title>
     <link rel="stylesheet" type="text/css" href="uv/uv.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="https://unpkg.com/manifesto.js/dist/client/manifesto.bundle.js"></script>
-    <script src="https://unpkg.com/iiif-gallery/dist/iiifgallery.js"></script>
+    <script src="https://unpkg.com/iiif-gallery@0.0.4/dist/iiifgallery.js"></script>
     <script src="uv/lib/offline.js"></script>
     <script src="uv/helpers.js"></script>
 </head>
+
 <body>
 
-    <iiif-gallery manifest="https://edsilv.github.io/uv-app-starter/content/index.json"></iiif-gallery>
+    <nav>
+        <h1>My Collection</h1>
+    </nav>
 
-    <div id="uv" class="uv"></div>
+    <main>
+
+        <div id="uv" class="uv"></div>
+
+        <iiif-gallery manifest="http://localhost:8888/collection/index.json"></iiif-gallery>
+
+    </main>
 
     <script>
 
-        var uv, urlDataProvider;
+        var uv, $uv, urlDataProvider, manifest;
 
-        function setupUV(manifest) {
+        function setupUV() {
 
             urlDataProvider = new UV.URLDataProvider();
-            
+
             var data = {
                 iiifResourceUri: manifest,
                 configUri: 'uv-config.json',
@@ -39,16 +49,21 @@
 
             uv = createUV('#uv', data, urlDataProvider);
 
-            uv.on('created', function() {
+            uv.on('created', function () {
                 Utils.Urls.setHashParameter('manifest', manifest);
             });
         }
 
-        function openManifest(manifest) {
+        function openManifest() {
 
             if (!uv) {
-                setupUV(manifest);
+
+                $uv.slideDown("fast", function() {
+                    setupUV();
+                });
+
             } else {
+
                 uv.set({
                     iiifResourceUri: manifest,
                     collectionIndex: 0,
@@ -56,21 +71,35 @@
                     sequenceIndex: 0,
                     canvasIndex: 0
                 });
+
+                window.scrollTo(0, 0);
+
             }
-            
+
         }
-        
-        window.addEventListener('uvLoaded', function(e) { 
+
+        window.addEventListener('uvLoaded', function (e) {
+
+            $uv = $('#uv');
 
             const iiifGallery = document.querySelector('iiif-gallery');
 
             iiifGallery.addEventListener('onSelectManifest', function (evt) {
-                openManifest(evt.detail.id);
+                manifest = evt.detail.id;
+                openManifest();
             });
 
             iiifGallery.addEventListener('onSelectCollection', function (evt) {
-                openManifest(evt.detail.id);
+                manifest = evt.detail.id;
+                openManifest();
             });
+
+            // are there uv hash parameters?
+            manifest = Utils.Urls.getHashParameter('manifest');
+
+            if (manifest) {
+                openManifest();
+            }
 
         }, false);
 
@@ -78,4 +107,5 @@
 
     <script src="uv/uv.js"></script>
 </body>
+
 </html>
