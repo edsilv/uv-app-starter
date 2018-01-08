@@ -1,22 +1,9 @@
 {
-<<<<<<< HEAD
   "id": "https://edsilv.github.io/uv-app-starter/collection/index.json",
-  "type": "Collection",
-  "label": "Bones",
-  "members": [
-    {
-      "id": "https://edsilv.github.io/uv-app-starter/collection/animal_skull/index.json",
-      "type": "Manifest",
-      "label": "Animal Skull",
-      "thumbnail": [
-        {
-          "id": "https://edsilv.github.io/uv-app-starter/collection/animal_skull/thumb.jpg",
-=======
-  "id": "http://localhost:8888/collection/index.json",
   "type": "Collection",
   "items": [
     {
-      "id": "http://localhost:8888/collection/animal_skull/index.json",
+      "id": "https://edsilv.github.io/uv-app-starter/collection/animal_skull/index.json",
       "type": "Manifest",
       "label": {
         "@none": [
@@ -25,22 +12,13 @@
       },
       "thumbnail": [
         {
-          "id": "http://localhost:8888/collection/animal_skull/thumb.jpg",
->>>>>>> updatebiiif
+          "id": "https://edsilv.github.io/uv-app-starter/collection/animal_skull/thumb.jpg",
           "type": "Image"
         }
       ]
     },
     {
-<<<<<<< HEAD
       "id": "https://edsilv.github.io/uv-app-starter/collection/human_skull/index.json",
-      "type": "Manifest",
-      "label": "Human Skull",
-      "thumbnail": [
-        {
-          "id": "https://edsilv.github.io/uv-app-starter/collection/human_skull/thumb.jpg",
-=======
-      "id": "http://localhost:8888/collection/human_skull/index.json",
       "type": "Manifest",
       "label": {
         "@none": [
@@ -49,22 +27,13 @@
       },
       "thumbnail": [
         {
-          "id": "http://localhost:8888/collection/human_skull/thumb.jpg",
->>>>>>> updatebiiif
+          "id": "https://edsilv.github.io/uv-app-starter/collection/human_skull/thumb.jpg",
           "type": "Image"
         }
       ]
     },
     {
-<<<<<<< HEAD
       "id": "https://edsilv.github.io/uv-app-starter/collection/vertebra/index.json",
-      "type": "Manifest",
-      "label": "Vertebra",
-      "thumbnail": [
-        {
-          "id": "https://edsilv.github.io/uv-app-starter/collection/vertebra/thumb.jpg",
-=======
-      "id": "http://localhost:8888/collection/vertebra/index.json",
       "type": "Manifest",
       "label": {
         "@none": [
@@ -73,20 +42,15 @@
       },
       "thumbnail": [
         {
-          "id": "http://localhost:8888/collection/vertebra/thumb.jpg",
->>>>>>> updatebiiif
+          "id": "https://edsilv.github.io/uv-app-starter/collection/vertebra/thumb.jpg",
           "type": "Image"
         }
       ]
     }
-<<<<<<< HEAD
-  ]
-=======
   ],
   "label": {
     "@none": [
       "Bones"
     ]
   }
->>>>>>> updatebiiif
 }
