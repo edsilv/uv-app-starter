@@ -7,7 +7,8 @@
     "postinstall": "npm run sync",
     "sync": "rm -rf uv && cp -R node_modules/universalviewer/uv uv",
     "build": "biiif collection -u http://localhost:8888/collection",
-    "dist": "biiif collection -u https://edsilv.github.io/uv-app-starter/collection",
+    "dist": "biiif collection -u https://username.github.io/uv-app-starter/collection",
+    "publish": "npm run dist && git add -A && git commit -m \"published\" && git push origin gh-pages",
     "start": "npm run build && http-server -c-1 -p 8888"
   },
   "repository": {
@@ -17,7 +18,7 @@
   "keywords": [
     "IIIF",
     "universalviewer",
-    "starter"
+    "starter" 
   ],
   "author": "@edsilv",
   "license": "MIT",
@@ -26,10 +27,10 @@
   },
   "homepage": "https://github.com/UniversalViewer/uv-app-starter#readme",
   "devDependencies": {
-    "biiif-cli": "0.0.7",
+    "biiif-cli": "0.0.11",
     "http-server": "^0.10.0"
   },
   "dependencies": {
-    "universalviewer": "3.0.5"
+    "universalviewer": "3.0.6"
   }
 }
