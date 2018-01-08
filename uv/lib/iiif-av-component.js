@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 // iiif-av-component v0.0.2 https://github.com/iiif-commons/iiif-av-component#readme
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.iiifAvComponent = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (global){
+=======
+// iiif-av-component v0.0.6 https://github.com/iiif-commons/iiif-av-component#readme
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.iiifAvComponent = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function (global){
+/// <reference types="exjs" /> 
+>>>>>>> updatebiiif
 
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -33,7 +40,18 @@ var IIIFComponents;
         AVComponent.prototype.data = function () {
             return {
                 helper: null,
+<<<<<<< HEAD
                 defaultAspectRatio: 0.56
+=======
+                autoPlay: false,
+                defaultAspectRatio: 0.56,
+                content: {
+                    play: "Play",
+                    pause: "Pause",
+                    currentTime: "Current Time",
+                    duration: "Duration"
+                }
+>>>>>>> updatebiiif
             };
         };
         AVComponent.prototype.set = function (data) {
@@ -70,10 +88,17 @@ var IIIFComponents;
             var $timelineContainer = $('<div class="timelineContainer"></div>');
             var $timelineItemContainer = $('<div class="timelineItemContainer"></div>');
             var $controlsContainer = $('<div class="controlsContainer"></div>');
+<<<<<<< HEAD
             var $playButton = $('<button class="playButton">Play</button>');
             var $pauseButton = $('<button class="pauseButton">Pause</button>');
             var $timingControls = $('<span>Current Time: <span class="canvasTime"></span> / Duration: <span class="canvasDuration"></span></span>');
             $controlsContainer.append($playButton, $pauseButton, $timingControls);
+=======
+            var $playButton = $('<button class="playButton">' + this.options.data.content.play + '</button>');
+            var $timingControls = $('<span>' + this.options.data.content.currentTime + ': <span class="canvasTime"></span> / ' + this.options.data.content.duration + ': <span class="canvasDuration"></span></span>');
+            var $volumeControl = $('<input type="range" class="volume" min="0" max="1" step="0.01" value="1">');
+            $controlsContainer.append($playButton, $timingControls, $volumeControl);
+>>>>>>> updatebiiif
             $optionsContainer.append($timelineContainer, $timelineItemContainer, $controlsContainer);
             $player.append($canvasContainer, $optionsContainer);
             this._$element.append($player);
@@ -94,6 +119,19 @@ var IIIFComponents;
             }
             canvasInstance.$playerElement = $player;
             canvasInstance.logMessage = this._logMessage.bind(this);
+<<<<<<< HEAD
+=======
+            canvasInstance.on(AVComponent.Events.PLAYCANVAS, function () {
+                $playButton.removeClass('play');
+                $playButton.addClass('pause');
+                $playButton.text(this.options.data.content.pause);
+            }, this);
+            canvasInstance.on(AVComponent.Events.PAUSECANVAS, function () {
+                $playButton.removeClass('pause');
+                $playButton.addClass('play');
+                $playButton.text(this.options.data.content.play);
+            }, this);
+>>>>>>> updatebiiif
             $timelineContainer.slider({
                 value: 0,
                 step: 0.01,
@@ -114,6 +152,7 @@ var IIIFComponents;
             this.canvasInstances.push(canvasInstance);
             canvasInstance.initContents();
             $playButton.on('click', function () {
+<<<<<<< HEAD
                 canvasInstance.playCanvas();
             });
             $pauseButton.on('click', function () {
@@ -122,6 +161,30 @@ var IIIFComponents;
             canvasInstance.setCurrentTime(0);
             $timingControls.find('.canvasDuration').text(IIIFComponents.AVComponentUtils.Utils.formatTime(canvasInstance.canvasClockDuration));
             this._logMessage('CREATED CANVAS: ' + canvasInstance.canvasClockDuration + ' seconds, ' + canvasInstance.canvasWidth + ' x ' + canvasInstance.canvasHeight + ' px.');
+=======
+                if (canvasInstance.isPlaying) {
+                    canvasInstance.pause();
+                }
+                else {
+                    canvasInstance.play();
+                }
+            });
+            $volumeControl.on('input', function () {
+                canvasInstance.setVolume(Number(this.value));
+            });
+            $volumeControl.on('change', function () {
+                canvasInstance.setVolume(Number(this.value));
+            });
+            var that = this;
+            canvasInstance.$playerElement[0].addEventListener('loadedmetadata', function () {
+                canvasInstance.setCurrentTime(0);
+                if (that.options.data.autoPlay) {
+                    canvasInstance.play();
+                }
+                $timingControls.find('.canvasDuration').text(IIIFComponents.AVComponentUtils.Utils.formatTime(canvasInstance.canvasClockDuration));
+                that._logMessage('CREATED CANVAS: ' + canvasInstance.canvasClockDuration + ' seconds, ' + canvasInstance.canvasWidth + ' x ' + canvasInstance.canvasHeight + ' px.');
+            }, false);
+>>>>>>> updatebiiif
         };
         AVComponent.prototype.getCanvasInstanceById = function (canvasId) {
             canvasId = manifesto.Utils.normaliseUrl(canvasId);
@@ -136,7 +199,11 @@ var IIIFComponents;
             }
             return null;
         };
+<<<<<<< HEAD
         AVComponent.prototype.playCanvas = function (canvasId) {
+=======
+        AVComponent.prototype.play = function (canvasId) {
+>>>>>>> updatebiiif
             this.showCanvas(canvasId);
             var canvasInstance = this.getCanvasInstanceById(canvasId);
             if (canvasInstance) {
@@ -144,14 +211,22 @@ var IIIFComponents;
                 if (temporal && temporal[1]) {
                     var rangeTiming = temporal[1].split(',');
                     canvasInstance.setCurrentTime(rangeTiming[0]);
+<<<<<<< HEAD
                     canvasInstance.playCanvas();
+=======
+                    canvasInstance.play();
+>>>>>>> updatebiiif
                 }
             }
         };
         AVComponent.prototype.showCanvas = function (canvasId) {
             // pause all canvases
             for (var i = 0; i < this.canvasInstances.length; i++) {
+<<<<<<< HEAD
                 this.canvasInstances[i].pauseCanvas();
+=======
+                this.canvasInstances[i].pause();
+>>>>>>> updatebiiif
             }
             // hide all players
             this._$element.find('.player').hide();
@@ -194,6 +269,11 @@ var IIIFComponents;
         var Events = /** @class */ (function () {
             function Events() {
             }
+<<<<<<< HEAD
+=======
+            Events.PLAYCANVAS = 'play';
+            Events.PAUSECANVAS = 'pause';
+>>>>>>> updatebiiif
             Events.LOG = 'log';
             return Events;
         }());
@@ -211,6 +291,10 @@ var IIIFComponents;
 
 var IIIFComponents;
 (function (IIIFComponents) {
+<<<<<<< HEAD
+=======
+    // todo: extend BaseComponent?
+>>>>>>> updatebiiif
     var CanvasInstance = /** @class */ (function () {
         function CanvasInstance(canvas) {
             this._highPriorityFrequency = 25;
@@ -242,7 +326,11 @@ var IIIFComponents;
                     return null;
                 }
                 */
+<<<<<<< HEAD
                 var mediaSource;
+=======
+                var mediaSource = void 0;
+>>>>>>> updatebiiif
                 if (mediaItem.body.type == 'TextualBody') {
                     mediaSource = mediaItem.body.value;
                 }
@@ -270,14 +358,22 @@ var IIIFComponents;
                 */
                 var spatial = /xywh=([^&]+)/g.exec(mediaItem.target);
                 var temporal = /t=([^&]+)/g.exec(mediaItem.target);
+<<<<<<< HEAD
                 var xywh;
+=======
+                var xywh = void 0;
+>>>>>>> updatebiiif
                 if (spatial && spatial[1]) {
                     xywh = spatial[1].split(',');
                 }
                 else {
                     xywh = [0, 0, this.canvasWidth, this.canvasHeight];
                 }
+<<<<<<< HEAD
                 var t;
+=======
+                var t = void 0;
+>>>>>>> updatebiiif
                 if (temporal && temporal[1]) {
                     t = temporal[1].split(',');
                 }
@@ -287,7 +383,11 @@ var IIIFComponents;
                 var positionLeft = parseInt(xywh[0]), positionTop = parseInt(xywh[1]), mediaWidth = parseInt(xywh[2]), mediaHeight = parseInt(xywh[3]), startTime = parseInt(t[0]), endTime = parseInt(t[1]);
                 var percentageTop = this._convertToPercentage(positionTop, this.canvasHeight), percentageLeft = this._convertToPercentage(positionLeft, this.canvasWidth), percentageWidth = this._convertToPercentage(mediaWidth, this.canvasWidth), percentageHeight = this._convertToPercentage(mediaHeight, this.canvasHeight);
                 var temporalOffsets = /t=([^&]+)/g.exec(mediaItem.body.id);
+<<<<<<< HEAD
                 var ot;
+=======
+                var ot = void 0;
+>>>>>>> updatebiiif
                 if (temporalOffsets && temporalOffsets[1]) {
                     ot = temporalOffsets[1].split(',');
                 }
@@ -316,6 +416,7 @@ var IIIFComponents;
             return percentage;
         };
         CanvasInstance.prototype._renderMediaElement = function (data) {
+<<<<<<< HEAD
             var mediaElement;
             switch (data.type) {
                 case 'Image':
@@ -329,16 +430,36 @@ var IIIFComponents;
                     break;
                 case 'TextualBody':
                     mediaElement = $('<div class="anno">' + data.source + '</div>');
+=======
+            var $mediaElement;
+            switch (data.type) {
+                case 'Image':
+                    $mediaElement = $('<img class="anno" src="' + data.source + '" />');
+                    break;
+                case 'Video':
+                    $mediaElement = $('<video class="anno" src="' + data.source + '" />');
+                    break;
+                case 'Audio':
+                    $mediaElement = $('<audio class="anno" src="' + data.source + '" />');
+                    break;
+                case 'TextualBody':
+                    $mediaElement = $('<div class="anno">' + data.source + '</div>');
+>>>>>>> updatebiiif
                     break;
                 default:
                     return;
             }
+<<<<<<< HEAD
             mediaElement.css({
+=======
+            $mediaElement.css({
+>>>>>>> updatebiiif
                 top: data.top + '%',
                 left: data.left + '%',
                 width: data.width + '%',
                 height: data.height + '%'
             }).hide();
+<<<<<<< HEAD
             data.element = mediaElement;
             if (data.type == 'Video' || data.type == 'Audio') {
                 data.timeout = null;
@@ -352,6 +473,21 @@ var IIIFComponents;
                         }
                         else {
                             that.playbackStalled(true, self);
+=======
+            data.element = $mediaElement;
+            if (data.type == 'Video' || data.type == 'Audio') {
+                data.timeout = null;
+                var that_1 = this;
+                data.checkForStall = function () {
+                    var self = this;
+                    if (this.active) {
+                        that_1.checkMediaSynchronization();
+                        if (this.element.get(0).readyState > 0 && !this.outOfSync) {
+                            that_1.playbackStalled(false, self);
+                        }
+                        else {
+                            that_1.playbackStalled(true, self);
+>>>>>>> updatebiiif
                             if (this.timeout) {
                                 window.clearTimeout(this.timeout);
                             }
@@ -361,13 +497,18 @@ var IIIFComponents;
                         }
                     }
                     else {
+<<<<<<< HEAD
                         that.playbackStalled(false, self);
+=======
+                        that_1.playbackStalled(false, self);
+>>>>>>> updatebiiif
                     }
                 };
             }
             this._mediaElements.push(data);
             if (this.$playerElement) {
                 var targetElement = this.$playerElement.find('.canvasContainer');
+<<<<<<< HEAD
                 targetElement.append(mediaElement);
             }
             if (data.type == 'Video' || data.type == 'Audio') {
@@ -389,6 +530,35 @@ var IIIFComponents;
             }
             this._renderSyncIndicator(data);
         };
+=======
+                targetElement.append($mediaElement);
+            }
+            if (data.type == 'Video' || data.type == 'Audio') {
+                var self_1 = data;
+                $mediaElement.on('loadstart', function () {
+                    //console.log('loadstart');
+                    self_1.checkForStall();
+                });
+                $mediaElement.on('waiting', function () {
+                    //console.log('waiting');
+                    self_1.checkForStall();
+                });
+                $mediaElement.on('seeking', function () {
+                    //console.log('seeking');
+                    //self.checkForStall();
+                });
+                $mediaElement.attr('preload', 'auto');
+                $mediaElement.get(0).load(); // todo: type
+            }
+            this._renderSyncIndicator(data);
+        };
+        CanvasInstance.prototype.setVolume = function (value) {
+            for (var i = 0; i < this._mediaElements.length; i++) {
+                var $mediaElement = this._mediaElements[i];
+                $($mediaElement.element).prop("volume", value);
+            }
+        };
+>>>>>>> updatebiiif
         CanvasInstance.prototype._renderSyncIndicator = function (mediaElementData) {
             var leftPercent = this._convertToPercentage(mediaElementData.start, this.canvasClockDuration);
             var widthPercent = this._convertToPercentage(mediaElementData.end - mediaElementData.start, this.canvasClockDuration);
@@ -418,7 +588,11 @@ var IIIFComponents;
             this.lowPriorityUpdater();
             this.synchronizeMedia();
         };
+<<<<<<< HEAD
         CanvasInstance.prototype.playCanvas = function (withoutUpdate) {
+=======
+        CanvasInstance.prototype.play = function (withoutUpdate) {
+>>>>>>> updatebiiif
             if (this.isPlaying)
                 return;
             if (this.canvasClockTime === this.canvasClockDuration) {
@@ -439,9 +613,16 @@ var IIIFComponents;
             if (!withoutUpdate) {
                 this.synchronizeMedia();
             }
+<<<<<<< HEAD
             this.logMessage('PLAY canvas');
         };
         CanvasInstance.prototype.pauseCanvas = function (withoutUpdate) {
+=======
+            this.fire(IIIFComponents.AVComponent.Events.PLAYCANVAS);
+            this.logMessage('PLAY canvas');
+        };
+        CanvasInstance.prototype.pause = function (withoutUpdate) {
+>>>>>>> updatebiiif
             window.clearInterval(this.highPriorityInterval);
             window.clearInterval(this.lowPriorityInterval);
             window.clearInterval(this.canvasClockInterval);
@@ -451,13 +632,21 @@ var IIIFComponents;
                 this.lowPriorityUpdater();
                 this.synchronizeMedia();
             }
+<<<<<<< HEAD
+=======
+            this.fire(IIIFComponents.AVComponent.Events.PAUSECANVAS);
+>>>>>>> updatebiiif
             this.logMessage('PAUSE canvas');
         };
         CanvasInstance.prototype.canvasClockUpdater = function () {
             this.canvasClockTime = (Date.now() - this.canvasClockStartDate) / 1000;
             if (this.canvasClockTime >= this.canvasClockDuration) {
                 this.canvasClockTime = this.canvasClockDuration;
+<<<<<<< HEAD
                 this.pauseCanvas();
+=======
+                this.pause();
+>>>>>>> updatebiiif
             }
         };
         CanvasInstance.prototype.highPriorityUpdater = function () {
@@ -566,7 +755,11 @@ var IIIFComponents;
                         this._showWorkingIndicator(this.$playerElement.find('.canvasContainer'));
                     }
                     this.wasPlaying = this.isPlaying;
+<<<<<<< HEAD
                     this.pauseCanvas(true);
+=======
+                    this.pause(true);
+>>>>>>> updatebiiif
                     this.isStalled = aBoolean;
                 }
             }
@@ -578,7 +771,11 @@ var IIIFComponents;
                 if (this.stallRequestedBy.length === 0) {
                     this._hideWorkingIndicator();
                     if (this.isStalled && this.wasPlaying) {
+<<<<<<< HEAD
                         this.playCanvas(true);
+=======
+                        this.play(true);
+>>>>>>> updatebiiif
                     }
                     this.isStalled = aBoolean;
                 }
@@ -595,6 +792,29 @@ var IIIFComponents;
             $('.workingIndicator').remove();
             //console.log('hide working');
         };
+<<<<<<< HEAD
+=======
+        CanvasInstance.prototype.on = function (name, callback, ctx) {
+            var e = this._e || (this._e = {});
+            (e[name] || (e[name] = [])).push({
+                fn: callback,
+                ctx: ctx
+            });
+        };
+        CanvasInstance.prototype.fire = function (name) {
+            var args = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args[_i - 1] = arguments[_i];
+            }
+            var data = [].slice.call(arguments, 1);
+            var evtArr = ((this._e || (this._e = {}))[name] || []).slice();
+            var i = 0;
+            var len = evtArr.length;
+            for (i; i < len; i++) {
+                evtArr[i].fn.apply(evtArr[i].ctx, data);
+            }
+        };
+>>>>>>> updatebiiif
         return CanvasInstance;
     }());
     IIIFComponents.CanvasInstance = CanvasInstance;
