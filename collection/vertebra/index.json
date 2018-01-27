@@ -1,24 +1,24 @@
 {
-  "id": "https://edsilv.github.io/uv-app-starter/collection/vertebra/index.json",
+  "id": "http://localhost:8888/collection/vertebra/index.json",
   "type": "Manifest",
   "items": [
     {
       "type": "Sequence",
       "items": [
         {
-          "id": "https://edsilv.github.io/uv-app-starter/collection/vertebra/index.json/canvas/0",
+          "id": "http://localhost:8888/collection/vertebra/index.json/canvas/0",
           "type": "Canvas",
           "items": [
             {
-              "id": "https://edsilv.github.io/uv-app-starter/collection/vertebra/index.json/canvas/0/annotationpage/0",
+              "id": "http://localhost:8888/collection/vertebra/index.json/canvas/0/annotationpage/0",
               "type": "AnnotationPage",
               "items": [
                 {
-                  "id": "https://edsilv.github.io/uv-app-starter/collection/vertebra/index.json/canvas/0/annotation/0",
+                  "id": "http://localhost:8888/collection/vertebra/index.json/canvas/0/annotation/0",
                   "type": "Annotation",
                   "motivation": "painting",
                   "body": {
-                    "id": "https://edsilv.github.io/uv-app-starter/collection/vertebra/_vertebra/hc941fm6529.obj",
+                    "id": "http://localhost:8888/collection/vertebra/_vertebra/hc941fm6529.obj",
                     "type": "PhysicalObject",
                     "format": "text/plain",
                     "label": {
@@ -27,7 +27,7 @@
                       ]
                     }
                   },
-                  "target": "https://edsilv.github.io/uv-app-starter/collection/vertebra/index.json/canvas/0"
+                  "target": "http://localhost:8888/collection/vertebra/index.json/canvas/0"
                 }
               ]
             }
@@ -49,7 +49,7 @@
   "attribution": "Stanford",
   "thumbnail": [
     {
-      "id": "https://edsilv.github.io/uv-app-starter/collection/vertebra/thumb.jpg",
+      "id": "http://localhost:8888/collection/vertebra/thumb.jpg",
       "type": "Image"
     }
   ]
